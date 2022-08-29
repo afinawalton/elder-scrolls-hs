@@ -6,7 +6,7 @@ const Card = ({ img, name, text, set, type }) => {
         <img src={img} alt={name}/>
         <h2>{name}</h2>
         <p>{text}</p>
-        <p>{set.name}</p>
+        <p>{set}</p>
         <p>{type} Type</p>
     </div>
   );

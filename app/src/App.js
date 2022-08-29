@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import Card from './components/Card';
 import Cards from './components/Cards';
+import useInfiniteScroll from './hooks/useInfiniteScroll';
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -14,7 +14,6 @@ function App() {
       return res.json();
     })
     .then((data) => {
-      console.log(data);
       setCards(data.cards.slice(0, 20));
       setMoreCards(data.cards.slice(20));
     })
@@ -25,7 +24,22 @@ function App() {
       console.log('Data fetch attempted!')
     })
     // store the values in JSON
-  }, [])
+  }, []);
+
+  const fetchMoreCards = () => {
+    setTimeout(() => {
+      // add 20 more cards to cards
+      // as long as moreCards still has cards left
+      if (moreCards.length) {
+        setCards([...cards, ...moreCards.slice(0, 20)]);
+        // more cards only holds remaining cards
+        setMoreCards(moreCards.slice(20));
+      }
+      // always set fetching to false, otherwise 'still fetching' message will still appear
+      setIsFetching(false);
+    }, 2000);
+  };
+  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreCards);
 
   return (
     <div className="App">
@@ -38,7 +52,7 @@ function App() {
           <p><cite><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls">Wikipedia article about The Elder Scrolls</a></cite></p>
         </section>
       <main id="cards">
-      <Cards cards={cards} moreCards={moreCards} />
+      <Cards cards={cards} moreCards={moreCards} isFetching={isFetching} />
       </main>
     </div>
   );

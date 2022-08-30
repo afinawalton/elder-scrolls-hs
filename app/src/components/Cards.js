@@ -1,4 +1,5 @@
 import Card from "./Card";
+import LoadingIndicator from "./LoadingIndicator";
 
 const Cards = ({ cards, isFetching }) => {
   // store the first 20 [0:20] cards in a new array? or using .slice
@@ -15,7 +16,7 @@ const Cards = ({ cards, isFetching }) => {
   return (
     <>
       {firstCards}
-      {isFetching && 'Fetching more cards...'}
+      {isFetching && <LoadingIndicator />}
     </>
     );
 };

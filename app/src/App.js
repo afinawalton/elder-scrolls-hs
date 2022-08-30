@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import Cards from './components/Cards';
+import LoadingIndicator from './components/LoadingIndicator';
 import useInfiniteScroll from './hooks/useInfiniteScroll';
 
 function App() {
@@ -52,7 +53,8 @@ function App() {
           <p><cite><a href="https://en.wikipedia.org/wiki/The_Elder_Scrolls">Wikipedia article about The Elder Scrolls</a></cite></p>
         </section>
       <main id="cards">
-      <Cards cards={cards} moreCards={moreCards} isFetching={isFetching} />
+        {!cards.length && <LoadingIndicator />}
+        <Cards cards={cards} moreCards={moreCards} isFetching={isFetching} />
       </main>
     </div>
   );

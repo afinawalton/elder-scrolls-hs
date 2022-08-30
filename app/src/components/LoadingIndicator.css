@@ -1,3 +1,10 @@
+#loading-area {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  margin-top: 25px;
+}
+
 #loader {
   border: 7px solid #f3f3f3; /* Light grey */
   border-top: 7px solid #3498db; /* Blue */

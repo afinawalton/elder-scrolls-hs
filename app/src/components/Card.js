@@ -1,13 +1,14 @@
 import './Card.css';
 
 const Card = ({ img, name, text, set, type }) => {
+
   return (
     <div className="card">
-        <img src={img} alt={name}/>
+        <img className='cardImg' src={img} alt={name}/>
         <h2>{name}</h2>
-        <p>{text}</p>
-        <p>{set}</p>
-        <p>{type} Type</p>
+        {text && <p>{text}</p>}
+        <p id='set'>{set}</p>
+        <p id='type'>{type} Type</p>
     </div>
   );
 };

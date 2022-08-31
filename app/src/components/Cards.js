@@ -2,7 +2,7 @@ import Card from "./Card";
 import LoadingIndicator from "./LoadingIndicator";
 import "./Cards.css";
 
-const Cards = ({ cards, isFetching }) => {
+const Cards = ({ cards, moreCards, isFetching }) => {
   // store the first 20 [0:20] cards in a new array? or using .slice
   // map over each object, and pull out the necessary properties
   // pass those properties as props into Card components
@@ -17,7 +17,7 @@ const Cards = ({ cards, isFetching }) => {
   return (
     <div id="cards-container">
       <section id="cards">{firstCards}</section>
-      {isFetching && <LoadingIndicator />}
+      {isFetching && <LoadingIndicator hasMoreCards={!!moreCards.length} />}
     </div>
   );
 };

@@ -28,6 +28,7 @@ function App() {
   }, []);
 
   const fetchMoreCards = () => {
+    console.log('fetchMoreCards called!');
     setTimeout(() => {
       // add 20 more cards to cards
       // as long as moreCards still has cards left

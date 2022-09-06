@@ -1,0 +1,14 @@
+#search {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+#search > * {
+  height: 30px;
+  padding: 0;
+}
+
+#search button {
+  border: none;
+  height: 30px;
+}

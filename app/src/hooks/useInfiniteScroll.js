@@ -28,6 +28,8 @@ const useInfiniteScroll = (callback) => {
     setIsFetching(true);
   };
 
+  // if searchValue, remove event listener
+
   return [isFetching, setIsFetching];
 };
 

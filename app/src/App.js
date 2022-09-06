@@ -1,45 +1,35 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Cards from "./components/Cards";
+import Search from "./components/Search";
 import LoadingIndicator from "./components/LoadingIndicator";
 import useInfiniteScroll from "./hooks/useInfiniteScroll";
+import { fetchCards } from "./helpers";
 
 function App() {
   const [cards, setCards] = useState([]);
-  const [moreCards, setMoreCards] = useState([]);
+  const [limit, setLimit] = useState(20);
 
   useEffect(() => {
-    // call the API
-    fetch("https://api.elderscrollslegends.io/v1/cards")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setCards(data.cards.slice(0, 20));
-        setMoreCards(data.cards.slice(20));
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        console.log("Data fetch attempted!");
-      });
-    // store the values in JSON
+    const renderCards = async () => {
+      const data = await fetchCards({ type: "array", value: cards, limit });
+      console.log(data);
+      setCards(data);
+    }
+    renderCards();
   }, []);
 
-  const fetchMoreCards = () => {
-    console.log('fetchMoreCards called!');
-    setTimeout(() => {
-      // add 20 more cards to cards
-      // as long as moreCards still has cards left
-      if (moreCards.length) {
-        setCards([...cards, ...moreCards.slice(0, 20)]);
-        // more cards only holds remaining cards
-        setMoreCards(moreCards.slice(20));
+  const fetchMoreCards = async () => {
+    setTimeout(async () => {
+      console.log('limit is currently', limit);
+      if (limit < 100 ) {
+        setLimit(limit + 20);
+        const data = await fetchCards({ type: "loading", value: null, limit });
+        setCards(data);
       }
       // always set fetching to false, otherwise 'still fetching' message will still appear
       setIsFetching(false);
-    }, 2000);
+    }, 1000);
   };
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreCards);
 
@@ -67,8 +57,9 @@ function App() {
           </p>
         </section>
         <section id="displayCards">
+          <Search filterCards={setCards} setLimit={setLimit} />
           {!cards.length && <LoadingIndicator />}
-          <Cards cards={cards} moreCards={moreCards} isFetching={isFetching} />
+          <Cards cards={cards} isFetching={isFetching} />
         </section>
       </main>
     </div>

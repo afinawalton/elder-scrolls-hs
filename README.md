@@ -22,3 +22,9 @@ A React application that displays Elder Scrolls cards from a [public API](https:
 3. When the app first loads, the first 20 cards are pulled from the Elder Scrolls API.
 4. Search for cards using the search field located below the main description.
 5. Scroll to the bottom of the browser to load 20 more cards from the API.
+
+## Preview
+### Desktop
+![localhost_3000_](https://user-images.githubusercontent.com/45860724/188942795-48bc3dfb-e5df-48d1-887d-7a8713dd34b1.png)
+### Mobile
+![localhost_3000_(iPhone SE)](https://user-images.githubusercontent.com/45860724/188943400-3e949e98-5203-4e6e-b589-d38df95e8f21.png)
